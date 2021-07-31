@@ -27,3 +27,8 @@
 
 ## Where is the data coming from?
 Since there wasn't a service to use for fetching the data, stubs are used, which can be found in the `contacts-service.service.ts` file.
+
+## Search functionality
+Contacts can be searched on the basis of name.
+
+![image](https://user-images.githubusercontent.com/22445332/127723036-c8a4b5a5-9b1c-44bf-869f-e525c1abb51e.png)
