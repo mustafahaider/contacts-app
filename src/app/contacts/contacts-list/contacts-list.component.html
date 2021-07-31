@@ -1,0 +1,51 @@
+<div fxLayout="row" fxLayoutAlign="space-between" fxFlex>
+    <div fxFlex="45" class="contacts-list-container">
+        <div class="contacts-list-navbar" fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+                <button mat-button class="icon-button-white margin-right-12">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span class="navbar-heading">Contacts</span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-button class="icon-button-white margin-right-8">
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+                <button mat-button class="icon-button-white">
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="contacts-list">
+            <div class="" fxLayout="row" fxLayoutAlign="start center">
+                <input placeholder="Search for a contact" matInput #searchInput ([ngModel])="searchContactText" (keyup)="searchKeyStrokeEvent(searchInput, $event)" class="search-input" fxFlex>
+                <mat-icon class="generic-icon margin-right-12">search</mat-icon>
+            </div>
+            <div *ngFor="let contact of contactsList" fxLayout="row" fxLayoutAlign="start center" class="list-contact-container" (click)="contactSelected(contact.id)">
+                <img *ngIf="contact.imgUrl" class="contact-list-patient-img margin-right-12" src="{{contact.imgUrl}}" alt="">
+                <div *ngIf="!contact.imgUrl" class="contact-list-patient-img margin-right-12"></div>
+                <div class="contact-online-circle" [ngClass]="{'offline-color': !contact.isOnline}"></div>
+                <div fxFlex>
+                    <div class="font-14-bold-dark">{{contact.name}}</div>
+                    <div class="font-14-normal-light">{{contact.job}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" [ngClass]="{'row-selected': contact.id == selectedContactId}">
+                    <button mat-button class="icon-button-white margin-right-8">
+                        <mat-icon>question_answer</mat-icon>
+                    </button>
+                    <button mat-button class="icon-button-white margin-right-8">
+                        <mat-icon>phone</mat-icon>
+                    </button>
+                    <button mat-button class="icon-button-white">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div fxFlex>
+        <app-contact-details [selectedContact]="selectedContact"></app-contact-details>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="contact-details-container" *ngIf="selectedContact">
+    <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 13px;">
+        <img *ngIf="selectedContact.imgUrl" src="{{selectedContact.imgUrl}}" class="contact-image" alt="">
+        <div *ngIf="!selectedContact.imgUrl" class="image-placeholder"></div>
+        <div class="contact-online-circle" [ngClass]="{'offline-color': !selectedContact.isOnline}"></div>
+        <div>
+            <div class="contact-name-text">{{selectedContact.name}}</div>
+            <div *ngIf="selectedContact.job" class="contact-job-text">{{selectedContact.job}}</div>
+            <div *ngIf="!selectedContact.job" class="contact-job-text">---</div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" style="margin-top: 21px;">
+                <button mat-button class="message-button margin-right-6">
+                    <mat-icon class="margin-right-6">question_answer</mat-icon>
+                    <span>Message</span>
+                </button>
+                <button mat-button class="icon-button-white margin-right-6">
+                    <mat-icon>phone</mat-icon>
+                </button>
+                <button mat-button class="icon-button-white">
+                    <mat-icon>more_horiz</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div fxLayout="row" class="contact-details-subSection">
+            <div class="heading-section">Bio</div>
+            <div *ngIf="selectedContact.bio" class="details-section" fxFlex>{{selectedContact.bio}}</div>
+            <div *ngIf="!selectedContact.bio" class="details-section" fxFlex>---</div>
+        </div>
+
+        <div fxLayout="row" class="contact-details-subSection">
+            <div class="heading-section">Email</div>
+            <div class="details-section" fxLayout="column" fxFlex>
+                <div *ngIf="!selectedContact?.emails?.length">---</div>
+                <div *ngFor="let email of selectedContact.emails" fxLayout="row">
+                    <div fxFlex>{{email.value}}</div>
+                    <div class="primary-label" *ngIf="email.isPrimary">Primary</div>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="row" class="contact-details-subSection">
+            <div class="heading-section">Dial</div>
+            <div *ngIf="selectedContact.dial" class="details-section" fxFlex>{{selectedContact.dial}}</div>
+            <div *ngIf="!selectedContact.dial" class="details-section" fxFlex>---</div>
+        </div>
+
+        <div fxLayout="row" class="contact-details-subSection">
+            <div class="heading-section">Meeing</div>
+            <div *ngIf="selectedContact.meeting" class="details-section" fxFlex>{{selectedContact.meeting}}</div>
+            <div *ngIf="!selectedContact.meeting" class="details-section" fxFlex>---</div>
+        </div>
+
+        <div fxLayout="row" class="contact-details-subSection">
+            <div class="heading-section">Phone</div>
+            <div *ngIf="!selectedContact?.phoneNumbers?.length">---</div>
+            <div class="details-section" fxLayout="column" fxFlex>
+                <div *ngFor="let phone of selectedContact.phoneNumbers" fxLayout="row">
+                    <div fxFlex>{{phone.value}}</div>
+                    <div class="primary-label" *ngIf="phone.isPrimary">Primary</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!selectedContact" fxLayout="column" fxLayoutAlign="center center">
+    <img src="assets/images/empty-contacts-list.png" class="placeholder-empty-list-img" alt="">
+    <span class="placeholder-empty-list-text">Please select a contact to view its details.</span>
+</div>
